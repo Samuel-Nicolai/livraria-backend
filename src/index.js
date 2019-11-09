@@ -11,6 +11,7 @@ const routerBooks = require('../src/routes/books')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+// Apenas no desenvolvimento ==> CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH")
