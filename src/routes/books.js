@@ -7,4 +7,8 @@ router.get('/aleatory', (req, res) => {
     controller.getAleatoryBooks(res)
 })
 
+router.get('/:id?', (req, res) => {
+    controller.getBookById(req.params.id, res)
+})
+
 module.exports = router
