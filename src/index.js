@@ -6,6 +6,8 @@ const port = 3000
 // Import de rotas
 const routerCategories = require('./routes/categories')
 const routerBooks = require('../src/routes/books')
+const routerOrders = require('../src/routes/orders')
+const routerOrdersItems = require('../src/routes/orderitems')
 //const routerMatricula = require('../src/routes/matricula')
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -27,7 +29,8 @@ router.get('/', (req, res) => {
 app.use('/', router)
 app.use('/categories', routerCategories)
 app.use('/books', routerBooks)
-//app.use('/matricula', routerMatricula)
+app.use('/orders', routerOrders)
+app.use('/orderitems', routerOrdersItems)
 
 app.listen(port)
 console.log(`Listening in http://localhost:${port} 🚀️`)
