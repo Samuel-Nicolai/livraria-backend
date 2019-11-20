@@ -2,16 +2,22 @@ const db = require('../../config/db')
 
 const controllerAuthors = {
     async getAuthorsOfBook(id, res) {
-        const authors = await db('bookauthors')
-            .join(
-                'bookauthorsbooks',
-                'bookauthors.AuthorID',
-                'bookauthorsbooks.AuthorID'
-            )
-            .where({
-                ISBN: id
-            })
-        res.json(authors)
+        if (id) {
+            const authors = await db('bookauthors')
+                .join(
+                    'bookauthorsbooks',
+                    'bookauthors.AuthorID',
+                    'bookauthorsbooks.AuthorID'
+                )
+                .where({
+                    ISBN: id
+                })
+            if (!authors) {
+                res.sendStatus(404);
+            }
+            res.json(authors);
+        }
+        res.sendStatus(404);
     }
 }
 
