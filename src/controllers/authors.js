@@ -18,6 +18,18 @@ const controllerAuthors = {
             res.json(authors);
         }
         res.sendStatus(404);
+    },
+    async getBooksOfAuthor(id, res) {
+        const books = await db('bookdescriptions')
+            .join(
+                'bookauthorsbooks',
+                'bookdescriptions.ISBN',
+                'bookauthorsbooks.ISBN'
+            )
+            .where({
+                AuthorID: id
+            })
+        res.json(books);
     }
 }
 
