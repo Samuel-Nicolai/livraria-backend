@@ -12,6 +12,11 @@ const controllerBooks = {
         const book = await db('bookdescriptions')
         .where({ISBN: id})
         res.json(book);
+    },
+    async getBooksOfSearch(query, res) {
+        const books = await db('bookdescriptions')
+            .where('title', 'LIKE', `%${query}%`)
+        res.json(books)
     }
 }
 

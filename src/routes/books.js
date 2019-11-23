@@ -11,4 +11,8 @@ router.get('/:id?', (req, res) => {
     controller.getBookById(req.params.id, res)
 })
 
+router.get('/search/:query?', (req, res) => {
+    controller.getBooksOfSearch(req.params.query, res)
+})
+
 module.exports = router
