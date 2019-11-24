@@ -2,7 +2,17 @@ const db = require('../../config/db')
 
 const controllerCategories = {
     async getCategories(res) {
-        const categories = await db('bookcategories')
+        const categories = await db('bookcategoriesbooks')
+            .join(
+                'bookcategories',
+                'bookcategoriesbooks.CategoryID',
+                'bookcategories.CategoryID'
+            )
+            .select(
+                'bookcategories.CategoryID',
+                'bookcategories.CategoryName'
+            )
+            .distinct('bookcategories.CategoryName')
             .orderBy('CategoryName', 'asc')
         res.json(categories)
     },
