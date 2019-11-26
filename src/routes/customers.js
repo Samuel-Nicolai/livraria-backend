@@ -10,4 +10,8 @@ router.post('/login', (req, res) => {
     controller.login(req.body.email, res)
 })
 
+router.patch('/', (req, res) => {
+    controller.updateCustomer(req.body, res)
+})
+
 module.exports = router

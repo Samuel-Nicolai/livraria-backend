@@ -10,7 +10,7 @@ const controllerCustomers = {
 
             if (id) {
                 res.send({
-                    id: id[0],
+                    custID: id[0],
                     ...customer
                 })
             }
@@ -29,7 +29,25 @@ const controllerCustomers = {
         else {
             res.status(400).send('Usuário inexistente.')
         }
-    }
+    },
+    async updateCustomer(customer, res) {
+
+        try {
+            const id = await db('bookcustomers')
+                .returning('custID')
+                .update({ ...customer })
+                .where({ custID: customer.custID })
+
+            if (id) {
+                res.send({
+                    custID: id[0],
+                    ...customer
+                })
+            }
+        } catch (e) {
+            res.status(500).send('Erro ao inserir usuário')
+        }
+    },
 }
 
 module.exports = controllerCustomers
