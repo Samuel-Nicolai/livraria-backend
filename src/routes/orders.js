@@ -14,4 +14,8 @@ router.post('/', (req, res) => {
     controller.insertOrder(req.body.custID, req.body.orderdate, res)  
 })
 
+router.post('/atomic', (req, res) => {
+    controller.insertOrderAtomic(req.body, res)  
+})
+
 module.exports = router
