@@ -2,20 +2,18 @@ const db = require('../../config/db')
 
 const controllerCustomers = {
     async insertCustomer(customer, res) {
-        
-        const user = await db('bookcustomers')
-            .where({ email: customer.email })
-        
-        if (user) {
-            res.status(400).send('E-mail já cadastrado.')
-        }
 
         try {
             const id = await db('bookcustomers')
                 .returning('custID')
                 .insert({ ...customer })
 
-            res.send(id)
+            if (id) {
+                res.send({
+                    id: id[0],
+                    ...customer
+                })
+            }
         } catch (e) {
             res.status(500).send('Erro ao inserir usuário')
         }
