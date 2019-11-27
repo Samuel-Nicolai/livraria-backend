@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id?', (req, res) => {
-    controller.getOrderItemsByOrderId(req.params.id, res)
+    controller.getOrderItemsByCustomer(req.params.id, res)
 })
 
 router.post('/', (req, res) => {

@@ -13,9 +13,15 @@ const controllerOrderItems = {
             }
     },
 
-    async getOrderItemsByOrderId(orderid, res) {
+    async getOrderItemsByCustomer(id, res) {
         const order = await db('bookorderitems')
-            .where({ orderID: orderid })
+            .join(
+                'bookorders',
+                'bookorderitems.orderID',
+                'bookorders.orderID'
+            )
+            .where({ custID: id })
+            .orderBy('orderdate', 'desc')
         res.json(order)
     },
 }
